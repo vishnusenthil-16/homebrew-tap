@@ -7,8 +7,8 @@ class LatchSecrets < Formula
   sha256 "62f490163ac7dad405d6ab05d3e6926d12a14efe0dd58cc9613f9bfff73673eb"
   license "Apache-2.0"
 
-  depends_on :macos
   depends_on "rust" => :build
+  depends_on :macos
 
   def fetch
     system "cargo", "fetch", "--locked"
@@ -34,6 +34,6 @@ class LatchSecrets < Formula
     state = testpath/"isolated"
     result = shell_output("#{bin}/latch --state-dir #{state} --json status")
     assert_equal false, JSON.parse(result).fetch("configured")
-    refute_predicate state, :exist?
+    refute_path_exists state
   end
 end

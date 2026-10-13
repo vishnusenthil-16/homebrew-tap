@@ -3,8 +3,8 @@ require "json"
 class LatchSecrets < Formula
   desc "Agent-friendly Vaultwarden credentials through the Bitwarden CLI"
   homepage "https://github.com/vishnusenthil-16/latch-secrets"
-  url "https://github.com/vishnusenthil-16/latch-secrets/releases/download/v0.2.0/latch-secrets-0.2.0.tar.gz"
-  sha256 "7195980906e30cdf54bc187448d9d1f258404e435c1159b62467cf614a2a1e8d"
+  url "https://github.com/vishnusenthil-16/latch-secrets/releases/download/v0.2.1/latch-secrets-0.2.1.tar.gz"
+  sha256 "aad90dcd982f56c2a5b518121a4bac5a087d3589c00ff6e48f4a89340ff193c0"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -30,7 +30,7 @@ class LatchSecrets < Formula
   end
 
   test do
-    assert_match "latch 0.2.0", shell_output("#{bin}/latch --version")
+    assert_match "latch 0.2.1", shell_output("#{bin}/latch --version")
     state = testpath/"isolated"
     result = shell_output("#{bin}/latch --state-dir #{state} --json status")
     assert_equal false, JSON.parse(result).fetch("configured")

@@ -3,8 +3,8 @@ require "json"
 class LatchSecrets < Formula
   desc "Agent-friendly Vaultwarden credentials through the Bitwarden CLI"
   homepage "https://github.com/vishnusenthil-16/latch-secrets"
-  url "https://github.com/vishnusenthil-16/latch-secrets/releases/download/v0.2.1/latch-secrets-0.2.1.tar.gz"
-  sha256 "aad90dcd982f56c2a5b518121a4bac5a087d3589c00ff6e48f4a89340ff193c0"
+  url "https://github.com/vishnusenthil-16/latch-secrets/releases/download/v0.3.0/latch-secrets-0.3.0.tar.gz"
+  sha256 "79c18d5337098a5a02492e239580072fa0288a1e76e8872615469e0bb39d5645"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -26,11 +26,12 @@ class LatchSecrets < Formula
       Configure explicitly with `latch configure --server URL --bw /absolute/path/to/bw`.
       Install Bitwarden CLI separately and pin version 2026.8.0 for the
       supported Vaultwarden server. No service is started by this formula.
+      Browser fill additionally requires Node.js 22.4+ on PATH.
     EOS
   end
 
   test do
-    assert_match "latch 0.2.1", shell_output("#{bin}/latch --version")
+    assert_match "latch 0.3.0", shell_output("#{bin}/latch --version")
     state = testpath/"isolated"
     result = shell_output("#{bin}/latch --state-dir #{state} --json status")
     assert_equal false, JSON.parse(result).fetch("configured")
